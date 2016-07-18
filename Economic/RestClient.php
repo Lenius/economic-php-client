@@ -4,7 +4,6 @@ namespace Economic;
 use Economic\API\Client;
 use Economic\API\Request;
 
-
 class RestClient
 {
     /**

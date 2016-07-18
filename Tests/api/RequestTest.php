@@ -1,10 +1,10 @@
 <?php
-
 namespace Economic\Tests;
 
+use Economic\API\Client;
 use Economic\API\Request;
 use Economic\API\Response;
-use Economic\RestClient;
+
 
 class RequestTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,15 +12,14 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $client = new RestClient('demo','demo');
+        $client = new Client('demo','demo');
         $this->request = new Request($client);
     }
 
     public function testResponseInstance()
     {
-        $pingResponse = $this->request->get('/');
-
-        $this->assertTrue(($pingResponse instanceof Response));
+        $getResponse = $this->request->get('/');
+        $this->assertTrue(($getResponse instanceof Response));
     }
     
 }

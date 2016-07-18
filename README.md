@@ -8,7 +8,6 @@ Economic-php-client
 UNDER DEVELOPMENT - DONT USE
 
 
-
 ### Access all debitors
 Call the Customers url /Customers
 ```php

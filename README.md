@@ -1,7 +1,10 @@
 # economic-php-client
 
-UNDER DEVELOPMENT - DONT USE
+Economic-php-client
+============
+[![Total Downloads](https://poser.pugx.org/lenius/economic-php-client/downloads.svg)](https://packagist.org/packages/lenius/economic-php-client)
 
+UNDER DEVELOPMENT - DONT USE
 
 
 

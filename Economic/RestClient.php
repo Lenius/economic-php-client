@@ -26,9 +26,9 @@ class RestClient
      * @param string $secret_token
      * @param string $grant_token
      */
-    public function __construct($secret_token = '',$grant_token = '')
+    public function __construct($secret_token = '', $grant_token = '')
     {
-        $client = new Client($secret_token,$grant_token);
+        $client = new Client($secret_token, $grant_token);
         $this->request = new Request($client);
     }
 }

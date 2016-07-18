@@ -29,7 +29,7 @@ class Client
      *
      * @access public
      */
-    public function __construct($secret_token = '',$grant_token = '')
+    public function __construct($secret_token = '', $grant_token = '')
     {
         // Check if lib cURL is enabled
         if (!function_exists('curl_init')) {

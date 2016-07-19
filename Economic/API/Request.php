@@ -7,7 +7,7 @@ namespace Economic\API;
 class Request
 {
     /**
-     * Contains QuickPay_Client instance
+     * Contains Economic_Client instance
      *
      * @access protected
      */

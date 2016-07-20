@@ -28,6 +28,9 @@ class Client
      * Instantiate object
      *
      * @access public
+     * @param string $secret_token
+     * @param string $grant_token
+     * @throws Exception
      */
     public function __construct($secret_token = '', $grant_token = '')
     {
@@ -36,11 +39,19 @@ class Client
             throw new Exception('Lib cURL must be enabled on the server');
         }
 
+        if (empty($secret_token)) {
+            throw new Exception('secret token is missing');
+        }
+
+        if (empty($grant_token)) {
+            throw new Exception('grant token is missing');
+        }
+
         // Set auth string property
         $this->secret_token = $secret_token;
         $this->grant_token = $grant_token;
 
-        // Instantiate cURL object
+        // Instantiate cURL object with
         $this->authenticate();
     }
 
@@ -71,6 +82,7 @@ class Client
 
         $headers = array(
             'Accept: application/json',
+            'Content-Type: application/json; charset=utf-8'
         );
 
         if (!empty($this->secret_token)) {
@@ -81,6 +93,7 @@ class Client
             $headers[] = 'X-AgreementGrantToken:' . $this->grant_token;
         }
 
+        //default headers
         $options = array(
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_SSL_VERIFYPEER => true,

@@ -34,15 +34,13 @@ class Response
      */
     protected $response_data;
 
+
     /**
-     * __construct
-     *
-     * Instantiates a new response object
-     *
-     * @param int    $status_code      the HTTP status code
-     * @param string $sent_headers     the headers sent
-     * @param string $received_headers the headers received
-     * @param string $response_data    the http response body
+     * Response constructor.
+     * @param $status_code
+     * @param $sent_headers
+     * @param $received_headers
+     * @param $response_data
      */
     public function __construct($status_code, $sent_headers, $received_headers, $response_data)
     {
@@ -52,15 +50,10 @@ class Response
         $this->response_data = $response_data;
     }
 
+
     /**
-     * asRaw
-     *
-     * Returns the HTTP status code, headers and response body.
-     * Usage: list($status_code, $headers, $response_body) = $response->as_raw().
-     *
-     * @param  boolan $keep_authorization_value Normally the value of the
-     *                                          Authorization: header is masked. True keeps the sent value.
-     * @return array  [integer, string[], string]
+     * @param bool $keep_authorization_value
+     * @return array
      */
     public function asRaw($keep_authorization_value = false)
     {

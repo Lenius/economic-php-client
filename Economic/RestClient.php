@@ -1,5 +1,5 @@
 <?php
-namespace Economic;
+namespace Lenius\Economic;
 
 use Economic\API\Client;
 use Economic\API\Request;

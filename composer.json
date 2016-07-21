@@ -17,12 +17,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Economic\\": "Economic/"
+            "Lenius\\Economic\\": "Economic/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-          "Economic\\Tests\\": "Tests/api/"
+          "Lenius\\Economic\\Tests\\": "Tests/api/"
         }
     },
     "require-dev" : {

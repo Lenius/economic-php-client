@@ -1,9 +1,9 @@
 <?php
-namespace Economic\Tests;
+namespace Lenius\Economic\Tests;
 
-use Economic\API\Client;
-use Economic\API\Request;
-use Economic\API\Response;
+use Lenius\Economic\API\Client;
+use Lenius\Economic\API\Request;
+use Lenius\Economic\API\Response;
 
 
 class RequestTest extends \PHPUnit_Framework_TestCase

@@ -1,5 +1,5 @@
 <?php
-namespace Economic\API;
+namespace Lenius\Economic\API;
 
 /**
  * @class      Economic_Request
@@ -134,15 +134,12 @@ class Request
         curl_setopt($this->client->ch, CURLOPT_URL, Constants::API_URL . trim($params, '/'));
     }
 
+
     /**
-     * EXECUTE function.
-     *
-     * Performs the prepared API request
-     *
-     * @access protected
-     * @param  string $request_type
-     * @param  array  $form
+     * @param $request_type
+     * @param array $form
      * @return Response
+     * @throws Exception
      */
     protected function execute($request_type, $form = array())
     {

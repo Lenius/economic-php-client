@@ -1,5 +1,5 @@
 <?php
-namespace Economic\API;
+namespace Lenius\Economic\API;
 
 /**
  * @class       Economic_Constants

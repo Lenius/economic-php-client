@@ -2,7 +2,7 @@
 
 namespace Economic\Tests;
 
-use Economic\API\Exception;
+use Lenius\Economic\API\Exception;
 
 class ExceptionTest extends \PHPUnit_Framework_TestCase
 {

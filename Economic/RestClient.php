@@ -1,8 +1,8 @@
 <?php
 namespace Lenius\Economic;
 
-use Economic\API\Client;
-use Economic\API\Request;
+use Lenius\Economic\API\Client;
+use Lenius\Economic\API\Request;
 
 class RestClient
 {

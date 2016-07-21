@@ -13,7 +13,7 @@ Call the Customers url /Customers
 $appToken = 'demo';
 $grant = 'demo';
 
-$client = new \Economic\RestClient($appToken,$grant);
+$client = new Lenius\Economic\RestClient($appToken,$grant);
 
 $parms = ['pagesize'=>100];
 

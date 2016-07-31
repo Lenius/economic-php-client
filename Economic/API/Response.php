@@ -1,4 +1,5 @@
 <?php
+
 namespace Lenius\Economic\API;
 
 /**
@@ -9,7 +10,7 @@ class Response
     /**
      * HTTP status code of request.
      *
-     * @var integer
+     * @var int
      */
     protected $status_code;
 
@@ -34,9 +35,9 @@ class Response
      */
     protected $response_data;
 
-
     /**
      * Response constructor.
+     *
      * @param $status_code
      * @param $sent_headers
      * @param $received_headers
@@ -50,9 +51,9 @@ class Response
         $this->response_data = $response_data;
     }
 
-
     /**
      * @param bool $keep_authorization_value
+     *
      * @return array
      */
     public function asRaw($keep_authorization_value = false)
@@ -71,18 +72,18 @@ class Response
             $sent_headers = implode("\n", $lines);
         }
 
-        return array(
+        return [
             $this->status_code,
-            array(
-                'sent' => $sent_headers,
+            [
+                'sent'     => $sent_headers,
                 'received' => $this->received_headers,
-            ),
+            ],
             $this->response_data,
-        );
+        ];
     }
 
     /**
-     * asArray
+     * asArray.
      *
      * Returns the response body as an array
      *
@@ -94,11 +95,11 @@ class Response
             return $response;
         }
 
-        return array();
+        return [];
     }
 
     /**
-     * asObject
+     * asObject.
      *
      * Returns the response body as an array
      *
@@ -110,11 +111,11 @@ class Response
             return $response;
         }
 
-        return new \stdClass;
+        return new \stdClass();
     }
 
     /**
-     * httpStatus
+     * httpStatus.
      *
      * Returns the http_status code
      *
@@ -126,11 +127,11 @@ class Response
     }
 
     /**
-     * isSuccess
+     * isSuccess.
      *
      * Checks if the http status code indicates a succesful or an error response.
      *
-     * @return boolean
+     * @return bool
      */
     public function isSuccess()
     {

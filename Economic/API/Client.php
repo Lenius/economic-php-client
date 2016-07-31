@@ -1,4 +1,5 @@
 <?php
+
 namespace Lenius\Economic\API;
 
 /**
@@ -7,16 +8,12 @@ namespace Lenius\Economic\API;
 class Client
 {
     /**
-     * Contains cURL instance
-     *
-     * @access public
+     * Contains cURL instance.
      */
     public $ch;
 
     /**
-     * Contains the authentication string
-     *
-     * @access protected
+     * Contains the authentication string.
      */
     protected $secret_token;
 
@@ -27,9 +24,9 @@ class Client
      *
      * Instantiate object
      *
-     * @access public
      * @param string $secret_token
      * @param string $grant_token
+     *
      * @throws Exception
      */
     public function __construct($secret_token = '', $grant_token = '')
@@ -59,8 +56,6 @@ class Client
      * Shutdown function.
      *
      * Closes the current cURL connection
-     *
-     * @access public
      */
     public function shutdown()
     {
@@ -73,33 +68,31 @@ class Client
      * authenticate function.
      *
      * Create a cURL instance with authentication headers
-     *
-     * @access public
      */
     protected function authenticate()
     {
         $this->ch = curl_init();
 
-        $headers = array(
+        $headers = [
             'Accept: application/json',
-            'Content-Type: application/json; charset=utf-8'
-        );
+            'Content-Type: application/json; charset=utf-8',
+        ];
 
         if (!empty($this->secret_token)) {
-            $headers[] = 'X-AppSecretToken:' . $this->secret_token;
+            $headers[] = 'X-AppSecretToken:'.$this->secret_token;
         }
 
         if (!empty($this->grant_token)) {
-            $headers[] = 'X-AgreementGrantToken:' . $this->grant_token;
+            $headers[] = 'X-AgreementGrantToken:'.$this->grant_token;
         }
 
         //default headers
-        $options = array(
+        $options = [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_SSL_VERIFYPEER => true,
-            CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
-            CURLOPT_HTTPHEADER => $headers
-        );
+            CURLOPT_HTTPAUTH       => CURLAUTH_BASIC,
+            CURLOPT_HTTPHEADER     => $headers,
+        ];
 
         curl_setopt_array($this->ch, $options);
     }

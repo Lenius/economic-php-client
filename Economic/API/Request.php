@@ -1,4 +1,5 @@
 <?php
+
 namespace Lenius\Economic\API;
 
 /**
@@ -7,9 +8,7 @@ namespace Lenius\Economic\API;
 class Request
 {
     /**
-     * Contains Economic_Client instance
-     *
-     * @access protected
+     * Contains Economic_Client instance.
      */
     protected $client;
 
@@ -17,8 +16,6 @@ class Request
      * __construct function.
      *
      * Instantiates the object
-     *
-     * @access public
      */
     public function __construct($client)
     {
@@ -30,19 +27,19 @@ class Request
      *
      * Performs an API GET request
      *
-     * @access public
-     * @param  string $path
-     * @param  array  $query
+     * @param string $path
+     * @param array  $query
+     *
      * @return Response
      */
-    public function get($path, $query = array())
+    public function get($path, $query = [])
     {
         // Add query parameters to $path?
         if (!empty($query)) {
             if (strpos($path, '?') === false) {
-                $path .= '?' . http_build_query($query, '', '&');
+                $path .= '?'.http_build_query($query, '', '&');
             } else {
-                $path .= ini_get('arg_separator.output') . http_build_query($query, '', '&');
+                $path .= ini_get('arg_separator.output').http_build_query($query, '', '&');
             }
         }
 
@@ -58,10 +55,9 @@ class Request
      *
      * Performs an API POST request
      *
-     * @access public
      * @return Response
      */
-    public function post($path, $form = array())
+    public function post($path, $form = [])
     {
         // Set the request params
         $this->setUrl($path);
@@ -75,10 +71,9 @@ class Request
      *
      * Performs an API PUT request
      *
-     * @access public
      * @return Response
      */
-    public function put($path, $form = array())
+    public function put($path, $form = [])
     {
         // Set the request params
         $this->setUrl($path);
@@ -92,10 +87,9 @@ class Request
      *
      * Performs an API PATCH request
      *
-     * @access public
      * @return Response
      */
-    public function patch($path, $form = array())
+    public function patch($path, $form = [])
     {
         // Set the request params
         $this->setUrl($path);
@@ -109,10 +103,9 @@ class Request
      *
      * Performs an API DELETE request
      *
-     * @access public
      * @return Response
      */
-    public function delete($path, $form = array())
+    public function delete($path, $form = [])
     {
         // Set the request params
         $this->setUrl($path);
@@ -126,28 +119,28 @@ class Request
      *
      * Takes an API request string and appends it to the API url
      *
-     * @access protected
      * @return void
      */
     protected function setUrl($params)
     {
-        curl_setopt($this->client->ch, CURLOPT_URL, Constants::API_URL . trim($params, '/'));
+        curl_setopt($this->client->ch, CURLOPT_URL, Constants::API_URL.trim($params, '/'));
     }
-
 
     /**
      * @param $request_type
      * @param array $form
-     * @return Response
+     *
      * @throws Exception
+     *
+     * @return Response
      */
-    protected function execute($request_type, $form = array())
+    protected function execute($request_type, $form = [])
     {
         // Set the HTTP request type
         curl_setopt($this->client->ch, CURLOPT_CUSTOMREQUEST, $request_type);
 
         // If additional data is delivered, we will send it along with the API request
-        if (is_array($form) && ! empty($form)) {
+        if (is_array($form) && !empty($form)) {
             $post = json_encode($form);
             curl_setopt($this->client->ch, CURLOPT_POSTFIELDS, $post);
         }

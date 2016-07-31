@@ -1,4 +1,5 @@
 <?php
+
 namespace Lenius\Economic\API;
 
 /**
@@ -7,7 +8,7 @@ namespace Lenius\Economic\API;
 class Constants
 {
     /**
-     * API DEFINITIONS
+     * API DEFINITIONS.
      */
     const API_URL = 'https://restapi.e-conomic.com/';
 }

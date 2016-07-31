@@ -1,10 +1,10 @@
 <?php
+
 namespace Lenius\Economic\Tests;
 
 use Lenius\Economic\API\Client;
 use Lenius\Economic\API\Request;
 use Lenius\Economic\API\Response;
-
 
 class RequestTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,7 +12,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $client = new Client('demo','demo');
+        $client = new Client('demo', 'demo');
         $this->request = new Request($client);
     }
 
@@ -24,7 +24,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
     public function testBadAuthentication()
     {
-        $client = new Client('foo','foo');
+        $client = new Client('foo', 'foo');
         $request = new Request($client);
 
         $response = $request->get('/apps');

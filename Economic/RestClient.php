@@ -1,4 +1,5 @@
 <?php
+
 namespace Lenius\Economic;
 
 use Lenius\Economic\API\Client;
@@ -7,9 +8,7 @@ use Lenius\Economic\API\Request;
 class RestClient
 {
     /**
-     * Contains the Economic_Request object
-     *
-     * @access public
+     * Contains the Economic_Request object.
      **/
     public $request;
 
@@ -21,7 +20,6 @@ class RestClient
      *
      * @auth_string string Authentication string for Economic
      *
-     * @access public
      * @param string $secret_token
      * @param string $grant_token
      */

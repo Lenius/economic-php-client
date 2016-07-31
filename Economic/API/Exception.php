@@ -1,4 +1,5 @@
 <?php
+
 namespace Lenius\Economic\API;
 
 /**
@@ -11,9 +12,8 @@ class Exception extends \Exception
      *
      * Redefine the exception so message isn't optional
      *
-     * @access public
-     * @param string $message
-     * @param int $code
+     * @param string    $message
+     * @param int       $code
      * @param Exception $previous
      */
     public function __construct($message, $code = 0, Exception $previous = null)

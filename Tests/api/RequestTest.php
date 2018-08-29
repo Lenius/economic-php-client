@@ -28,16 +28,16 @@ class RequestTest extends TestCase
         $client = new Client('foo', 'foo');
         $request = new Request($client);
 
-        $response = $request->get('/apps');
+        $response = $request->get('/units', ['demo' => 'true']);
 
         $this->assertEquals(401, $response->httpStatus());
     }
 
-    public function testSuccessfulGetResponse()
+    public function testSuccessfullGetResponse()
     {
-        $pingResponse = $this->request->get('/apps');
+        $response = $this->request->get('/units', ['demo' => 'true']);
 
-        $this->assertFalse($pingResponse->isSuccess());
+        $this->assertTrue($response->isSuccess());
     }
 
     public function testFailedGetResponse()

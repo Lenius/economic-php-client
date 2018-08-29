@@ -5,8 +5,9 @@ namespace Lenius\Economic\Tests;
 use Lenius\Economic\API\Client;
 use Lenius\Economic\API\Request;
 use Lenius\Economic\API\Response;
+use PHPUnit\Framework\TestCase;
 
-class RequestTest extends \PHPUnit_Framework_TestCase
+class RequestTest extends TestCase
 {
     protected $request;
 
@@ -36,7 +37,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $pingResponse = $this->request->get('/apps');
 
-        $this->assertTrue($pingResponse->isSuccess());
+        $this->assertFalse($pingResponse->isSuccess());
     }
 
     public function testFailedGetResponse()

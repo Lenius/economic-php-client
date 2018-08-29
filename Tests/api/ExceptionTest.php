@@ -3,8 +3,9 @@
 namespace Economic\Tests;
 
 use Lenius\Economic\API\Exception;
+use PHPUnit\Framework\TestCase;
 
-class ExceptionTest extends \PHPUnit_Framework_TestCase
+class ExceptionTest extends TestCase
 {
     private $testMessage = 'Economic Message';
     private $testCode = 100;

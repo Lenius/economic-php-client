@@ -182,6 +182,7 @@ class Request
         if (curl_errno($this->client->ch) !== 0) {
             // An error occurred
             fclose($fh_header);
+
             throw new Exception(curl_error($this->client->ch), curl_errno($this->client->ch));
         }
 

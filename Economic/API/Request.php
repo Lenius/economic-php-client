@@ -16,8 +16,10 @@ class Request
      * __construct function.
      *
      * Instantiates the object
+     *
+     * @param Client $client
      */
-    public function __construct($client)
+    public function __construct(Client $client)
     {
         $this->client = $client;
     }
@@ -28,9 +30,11 @@ class Request
      * Performs an API GET request
      *
      * @param string $path
-     * @param array  $query
+     * @param array $query
      *
      * @return Response
+     * 
+     * @throws Exception
      */
     public function get($path, $query = [])
     {
@@ -55,7 +59,12 @@ class Request
      *
      * Performs an API POST request
      *
+     * @param string $path
+     * @param array $form
+     * 
      * @return Response
+     * 
+     * @throws Exception
      */
     public function post($path, $form = [])
     {
@@ -71,7 +80,12 @@ class Request
      *
      * Performs an API PUT request
      *
+     * @param string $path
+     * @param array $form
+     * 
      * @return Response
+     * 
+     * @throws Exception
      */
     public function put($path, $form = [])
     {
@@ -87,7 +101,12 @@ class Request
      *
      * Performs an API PATCH request
      *
+     * @param string $path
+     * @param array $form
+     * 
      * @return Response
+     * 
+     * @throws Exception
      */
     public function patch($path, $form = [])
     {
@@ -103,7 +122,12 @@ class Request
      *
      * Performs an API DELETE request
      *
+     * @param string $path
+     * @param array $form
+     *
      * @return Response
+     * 
+     * @throws Exception
      */
     public function delete($path, $form = [])
     {
@@ -119,11 +143,13 @@ class Request
      *
      * Takes an API request string and appends it to the API url
      *
+     * @param string $path
+     *
      * @return void
      */
-    protected function setUrl($params)
+    protected function setUrl($path)
     {
-        curl_setopt($this->client->ch, CURLOPT_URL, Constants::API_URL.trim($params, '/'));
+        curl_setopt($this->client->ch, CURLOPT_URL, Constants::API_URL.trim($path, '/'));
     }
 
     /**

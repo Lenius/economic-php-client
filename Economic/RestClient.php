@@ -22,6 +22,8 @@ class RestClient
      *
      * @param string $secret_token
      * @param string $grant_token
+     * 
+     * @throws API\Exception
      */
     public function __construct($secret_token = '', $grant_token = '')
     {

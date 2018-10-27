@@ -30,11 +30,11 @@ class Request
      * Performs an API GET request
      *
      * @param string $path
-     * @param array $query
+     * @param array  $query
+     *
+     * @throws Exception
      *
      * @return Response
-     * 
-     * @throws Exception
      */
     public function get($path, $query = [])
     {
@@ -60,11 +60,11 @@ class Request
      * Performs an API POST request
      *
      * @param string $path
-     * @param array $form
-     * 
-     * @return Response
-     * 
+     * @param array  $form
+     *
      * @throws Exception
+     *
+     * @return Response
      */
     public function post($path, $form = [])
     {
@@ -81,11 +81,11 @@ class Request
      * Performs an API PUT request
      *
      * @param string $path
-     * @param array $form
-     * 
-     * @return Response
-     * 
+     * @param array  $form
+     *
      * @throws Exception
+     *
+     * @return Response
      */
     public function put($path, $form = [])
     {
@@ -102,11 +102,11 @@ class Request
      * Performs an API PATCH request
      *
      * @param string $path
-     * @param array $form
-     * 
-     * @return Response
-     * 
+     * @param array  $form
+     *
      * @throws Exception
+     *
+     * @return Response
      */
     public function patch($path, $form = [])
     {
@@ -123,11 +123,11 @@ class Request
      * Performs an API DELETE request
      *
      * @param string $path
-     * @param array $form
+     * @param array  $form
+     *
+     * @throws Exception
      *
      * @return Response
-     * 
-     * @throws Exception
      */
     public function delete($path, $form = [])
     {

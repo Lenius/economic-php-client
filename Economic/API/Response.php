@@ -24,24 +24,24 @@ class Response
     /**
      * The headers received during the request.
      *
-     * @var string
+     * @var string|bool
      */
     protected $received_headers;
 
     /**
      * Response body of last request.
      *
-     * @var string
+     * @var mixed
      */
     protected $response_data;
 
     /**
      * Response constructor.
      *
-     * @param $status_code
-     * @param $sent_headers
-     * @param $received_headers
-     * @param $response_data
+     * @param int $status_code
+     * @param string $sent_headers
+     * @param string|bool $received_headers
+     * @param mixed $response_data
      */
     public function __construct($status_code, $sent_headers, $received_headers, $response_data)
     {

@@ -153,7 +153,7 @@ class Request
     }
 
     /**
-     * @param $request_type
+     * @param string $request_type
      * @param array $form
      *
      * @throws Exception
@@ -172,7 +172,10 @@ class Request
         }
 
         // Store received headers in temporary memory file, remember sent headers
-        $fh_header = fopen('php://temp', 'w+');
+        if (!$fh_header = fopen('php://temp', 'w+')) {
+            throw new Exception('Fail to create tmp');
+        }
+
         curl_setopt($this->client->ch, CURLOPT_WRITEHEADER, $fh_header);
         curl_setopt($this->client->ch, CURLINFO_HEADER_OUT, true);
 

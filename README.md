@@ -8,7 +8,7 @@ https://restdocs.e-conomic.com
 Call the Customers url /Customers
 ```php
 $appToken = 'demo';
-$grant = 'demo';
+$grant    = 'demo';
 
 $client = new Lenius\Economic\RestClient($appToken,$grant);
 
@@ -18,7 +18,6 @@ $response = $client->request->get('customers',$parms);
 
 $status = $response->httpStatus();
 
-print_r($status);
 if( $status == 200 ) {
     // Successful request
     $data = $response->asArray();

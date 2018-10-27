@@ -38,10 +38,10 @@ class Response
     /**
      * Response constructor.
      *
-     * @param int $status_code
-     * @param string $sent_headers
+     * @param int         $status_code
+     * @param string      $sent_headers
      * @param string|bool $received_headers
-     * @param mixed $response_data
+     * @param mixed       $response_data
      */
     public function __construct($status_code, $sent_headers, $received_headers, $response_data)
     {

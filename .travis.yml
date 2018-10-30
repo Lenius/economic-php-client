@@ -7,25 +7,36 @@ php:
   - 7.2
   - nightly
 
+cache:
+  directories:
+  - ./vendor
+
 matrix:
   fast_finish: true
+  include:
+  - php: 7.1
+    env: COVERAGE=true PHPSTAN=true
   allow_failures:
-    - php: 7.0
     - php: nightly
 
+before_install:
+  - travis_retry composer clear-cache
+
 install:
-  - composer self-update
-  - composer install --no-interaction
+  - travis_retry composer self-update
+  - travis_retry composer install --no-interaction
 
 before_script:
-  - composer install --dev
-  - composer self-update
-  - mkdir -p build/logs
+  - travis_retry composer install --dev
+  - travis_retry composer self-update
+  - mkdir -p build
 
 script:
-  - vendor/bin/phpunit --coverage-clover build/logs/clover.xml ./Tests
+  - vendor/bin/phpunit --coverage-clover build/coverage.xml ./Tests
   - vendor/bin/phpcs --runtime-set ignore_warnings_on_exit 1 --standard=phpcs.xml Economic
-  - vendor/bin/phpstan analyse -l max Economic
+  - if [[ "$PHPSTAN" = true ]]; then vendor/bin/phpstan analyse -l max Economic; fi
 
 after_script:
-  - php vendor/bin/coveralls -v
+  - travis_retry php vendor/bin/php-coveralls -v
+  - if [[ "$COVERAGE" = true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
+  - if [[ "$COVERAGE" = true ]]; then php ocular.phar code-coverage:upload --format=php-clover build/coverage.xml; fi

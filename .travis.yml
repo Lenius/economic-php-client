@@ -1,6 +1,11 @@
 language: php
 sudo: false
 
+stages:
+- Code style analysis
+- test
+- Code coverage analysis
+
 php:
   - 7.0
   - 7.1
@@ -15,8 +20,8 @@ matrix:
   fast_finish: true
   include:
   - php: 7.1
-    env: COVERAGE=true PHPSTAN=true
   allow_failures:
+    - php: 7.0
     - php: nightly
 
 before_install:
@@ -33,10 +38,24 @@ before_script:
 
 script:
   - vendor/bin/phpunit --coverage-clover build/coverage.xml ./Tests
-  - vendor/bin/phpcs --runtime-set ignore_warnings_on_exit 1 --standard=phpcs.xml Economic
-  - if [[ "$PHPSTAN" = true ]]; then vendor/bin/phpstan analyse -l max Economic; fi
+
+jobs:
+  include:
+    - stage: Code coverage analysis
+      php: 7.2
+      # don't disable xdebug here
+      env: XDEBUG=true COVERAGE=true PHPSTAN=true
+      after_success:
+        - travis_retry php vendor/bin/php-coveralls -v
+    - stage: Code style analysis
+      php: 7.2
+      script:
+        - vendor/bin/phpcs --runtime-set ignore_warnings_on_exit 1 --standard=phpcs.xml Economic
+    - stage: phpstan
+      php: 7.2
+      script:
+        - vendor/bin/phpstan analyse -l max Economic
 
 after_script:
-  - travis_retry php vendor/bin/php-coveralls -v
   - if [[ "$COVERAGE" = true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
   - if [[ "$COVERAGE" = true ]]; then php ocular.phar code-coverage:upload --format=php-clover build/coverage.xml; fi

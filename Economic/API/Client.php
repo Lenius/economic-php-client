@@ -47,9 +47,6 @@ class Client
         // Set auth string property
         $this->secret_token = $secret_token;
         $this->grant_token = $grant_token;
-
-        // Instantiate cURL object with
-        $this->authenticate();
     }
 
     /**
@@ -65,14 +62,30 @@ class Client
     }
 
     /**
+     * Create function.
+     *
+     * Create cURL connection with authentication
+     */
+    public function create()
+    {
+        if (!empty($this->ch)) {
+            curl_close($this->ch);
+        }
+
+        // Instantiate cURL object
+        $this->ch = curl_init();
+
+        // Apply authentication headers
+        $this->authenticate();
+    }
+
+    /**
      * authenticate function.
      *
-     * Create a cURL instance with authentication headers
+     * Create authentication headers
      */
     protected function authenticate()
     {
-        $this->ch = curl_init();
-
         $headers = [
             'Accept: application/json',
             'Content-Type: application/json; charset=utf-8',

@@ -2,6 +2,8 @@
 
 namespace Lenius\Economic\API;
 
+use http\Exception\InvalidArgumentException;
+
 /**
  * @class      Economic_Request
  */
@@ -47,14 +49,8 @@ class Request
             }
         }
 
-        // Set the request params
-        $this->setUrl($path);
-
-        // Make sure to reset CURL headers back to GET.
-        curl_setopt($this->client->ch, CURLOPT_HTTPGET, true);
-
         // Start the request and return the response
-        return $this->execute('GET');
+        return $this->execute('GET', $path);
     }
 
     /**
@@ -71,11 +67,8 @@ class Request
      */
     public function post($path, $form = [])
     {
-        // Set the request params
-        $this->setUrl($path);
-
         // Start the request and return the response
-        return $this->execute('POST', $form);
+        return $this->execute('POST', $path, $form);
     }
 
     /**
@@ -92,11 +85,8 @@ class Request
      */
     public function put($path, $form = [])
     {
-        // Set the request params
-        $this->setUrl($path);
-
         // Start the request and return the response
-        return $this->execute('PUT', $form);
+        return $this->execute('PUT', $path, $form);
     }
 
     /**
@@ -113,11 +103,8 @@ class Request
      */
     public function patch($path, $form = [])
     {
-        // Set the request params
-        $this->setUrl($path);
-
         // Start the request and return the response
-        return $this->execute('PATCH', $form);
+        return $this->execute('PATCH', $path, $form);
     }
 
     /**
@@ -134,37 +121,31 @@ class Request
      */
     public function delete($path, $form = [])
     {
-        // Set the request params
-        $this->setUrl($path);
-
         // Start the request and return the response
-        return $this->execute('DELETE', $form);
-    }
-
-    /**
-     * setUrl function.
-     *
-     * Takes an API request string and appends it to the API url
-     *
-     * @param string $path
-     *
-     * @return void
-     */
-    protected function setUrl($path)
-    {
-        curl_setopt($this->client->ch, CURLOPT_URL, Constants::API_URL.trim($path, '/'));
+        return $this->execute('DELETE', $path, $form);
     }
 
     /**
      * @param string $request_type
-     * @param array  $form
+     * @param array $form
      *
-     * @throws Exception
-     *
+     * @param string $path
      * @return Response
+     * @throws Exception
      */
-    protected function execute($request_type, $form = [])
+    protected function execute($request_type, $path, $form = [])
     {
+        // Store received headers in temporary memory file, remember sent headers
+        if (!$path) {
+            throw new \InvalidArgumentException('Path is missing');
+        }
+
+        // Init client
+        $this->client->create();
+
+        // Set the request path
+        curl_setopt($this->client->ch, CURLOPT_URL, Constants::API_URL.trim($path, '/'));
+
         // Set the HTTP request type
         curl_setopt($this->client->ch, CURLOPT_CUSTOMREQUEST, $request_type);
 
@@ -200,6 +181,9 @@ class Request
 
         // Retrieve the HTTP response code
         $response_code = (int) curl_getinfo($this->client->ch, CURLINFO_HTTP_CODE);
+
+        // Shutdown client
+        $this->client->shutdown();
 
         // Return the response object.
         return new Response($response_code, $sent_headers, $received_headers, $response_data);

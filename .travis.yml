@@ -21,14 +21,12 @@ matrix:
   include:
   - php: 7.1
   allow_failures:
-    - php: 7.0
     - php: nightly
 
 before_install:
   - travis_retry composer clear-cache
 
 install:
-  - travis_retry composer self-update
   - travis_retry composer install --no-interaction
 
 before_script:
@@ -53,6 +51,8 @@ jobs:
         - vendor/bin/phpcs --runtime-set ignore_warnings_on_exit 1 --standard=phpcs.xml Economic
     - stage: phpstan
       php: 7.2
+      before_script:
+        - travis_retry composer require phpstan/phpstan
       script:
         - vendor/bin/phpstan analyse -l max Economic
 

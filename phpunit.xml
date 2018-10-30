@@ -10,18 +10,18 @@
         >
     <testsuites>
         <testsuite name="Economic Test Suite">
-            <directory suffix="Test.php">Tests</directory>
+            <directory>./Tests/</directory>
         </testsuite>
     </testsuites>
     <logging>
-      <log type="coverage-html" target="build/coverage" charset="UTF-8"/>
+      <log type="coverage-html" target="./build/coverage" charset="UTF-8"/>
     </logging>
     <filter>
         <whitelist>
-            <directory suffix=".php">Economic</directory>
+            <directory suffix=".php">./Economic/</directory>
             <exclude>
-                <directory>Tests</directory>
-                <directory>vendor</directory>
+                <directory>./Tests</directory>
+                <directory>./vendor</directory>
             </exclude>
         </whitelist>
     </filter>

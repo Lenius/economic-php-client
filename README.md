@@ -12,7 +12,7 @@ $grant    = 'demo';
 
 $client = new Lenius\Economic\RestClient($appToken,$grant);
 
-$parms = ['pagesize'=>100];
+$parms = ['pagesize' => 100];
 
 $response = $client->request->get('customers',$parms);
 

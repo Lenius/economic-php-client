@@ -51,7 +51,7 @@ class Request
         $this->setUrl($path);
 
         // Make sure to reset CURL headers back to GET.
-        curl_setopt($this->client->ch, CURLOPT_HTTPGET, TRUE);
+        curl_setopt($this->client->ch, CURLOPT_HTTPGET, true);
 
         // Start the request and return the response
         return $this->execute('GET');

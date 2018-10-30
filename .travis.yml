@@ -34,10 +34,10 @@ install:
 before_script:
   - travis_retry composer install --dev
   - travis_retry composer self-update
-  - mkdir -p build
+  - mkdir -p build/logs
 
 script:
-  - vendor/bin/phpunit --coverage-clover build/coverage.xml ./Tests
+  - vendor/bin/phpunit
 
 jobs:
   include:
@@ -50,14 +50,10 @@ jobs:
     - stage: Code style analysis
       php: 7.2
       script:
-        - vendor/bin/phpcs --runtime-set ignore_warnings_on_exit 1 --standard=phpcs.xml Economic
+        - vendor/bin/phpcs --runtime-set ignore_warnings_on_exit 1 --standard=phpcs.xml
     - stage: phpstan
       php: 7.2
       before_script:
-        - travis_retry composer require phpstan/phpstan
+        - travis_retry composer require --dev phpstan/phpstan
       script:
         - vendor/bin/phpstan analyse -l max Economic
-
-after_script:
-  - if [[ "$COVERAGE" = true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
-  - if [[ "$COVERAGE" = true ]]; then php ocular.phar code-coverage:upload --format=php-clover build/coverage.xml; fi

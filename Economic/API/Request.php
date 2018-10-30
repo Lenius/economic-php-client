@@ -2,8 +2,6 @@
 
 namespace Lenius\Economic\API;
 
-use http\Exception\InvalidArgumentException;
-
 /**
  * @class      Economic_Request
  */
@@ -127,11 +125,12 @@ class Request
 
     /**
      * @param string $request_type
-     * @param array $form
-     *
+     * @param array  $form
      * @param string $path
-     * @return Response
+     *
      * @throws Exception
+     *
+     * @return Response
      */
     protected function execute($request_type, $path, $form = [])
     {

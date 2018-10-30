@@ -26,6 +26,7 @@ before_install:
   - export INI_DIR=~/.phpenv/versions/$(phpenv version-name)/etc/conf.d
   - export INI=$INI_DIR/travis.ini
   - if [[ "$XDEBUG" = 'false' && -f $INI_DIR/xdebug.ini ]]; then phpenv config-rm xdebug.ini; fi
+  - travis_retry composer self-update
   - travis_retry composer clear-cache
 
 install:
@@ -33,7 +34,6 @@ install:
 
 before_script:
   - travis_retry composer install --dev
-  - travis_retry composer self-update
   - mkdir -p build/logs
 
 script:

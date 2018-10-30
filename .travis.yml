@@ -1,16 +1,16 @@
 language: php
 sudo: false
 
-stages:
-- Code style analysis
-- test
-- Code coverage analysis
-
 php:
   - 7.0
   - 7.1
   - 7.2
   - nightly
+
+env:
+  global:
+    - DEFAULT_COMPOSER_FLAGS="--no-interaction --no-suggest --prefer-source"
+    - XDEBUG="false"
 
 cache:
   directories:
@@ -18,16 +18,18 @@ cache:
 
 matrix:
   fast_finish: true
-  include:
-  - php: 7.1
   allow_failures:
     - php: nightly
 
 before_install:
+  # determine INI file
+  - export INI_DIR=~/.phpenv/versions/$(phpenv version-name)/etc/conf.d
+  - export INI=$INI_DIR/travis.ini
+  - if [[ "$XDEBUG" = 'false' && -f $INI_DIR/xdebug.ini ]]; then phpenv config-rm xdebug.ini; fi
   - travis_retry composer clear-cache
 
 install:
-  - travis_retry composer install --no-interaction
+  - travis_retry composer install
 
 before_script:
   - travis_retry composer install --dev
@@ -42,7 +44,7 @@ jobs:
     - stage: Code coverage analysis
       php: 7.2
       # don't disable xdebug here
-      env: XDEBUG=true COVERAGE=true PHPSTAN=true
+      env: XDEBUG=true COVERAGE=true
       after_success:
         - travis_retry php vendor/bin/php-coveralls -v
     - stage: Code style analysis

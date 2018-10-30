@@ -1,6 +1,6 @@
 <?php
 
-namespace Economic\Tests;
+namespace Lenius\Economic\Tests;
 
 use Lenius\Economic\API\Exception;
 use PHPUnit\Framework\TestCase;

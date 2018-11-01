@@ -20,15 +20,15 @@ Call the Customers url /Customers
 $appToken = 'demo';
 $grant    = 'demo';
 
-$client = new Lenius\Economic\RestClient($appToken,$grant);
+$client = new Lenius\Economic\RestClient($appToken, $grant);
 
 $parms = ['pagesize' => 100];
 
-$response = $client->request->get('customers',$parms);
+$response = $client->request->get('customers', $parms);
 
 $status = $response->httpStatus();
 
-if( $status == 200 ) {
+if ($status == 200) {
     // Successful request
     $data = $response->asArray();
     print_r($data);

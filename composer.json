@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": "~7.0",
-        "lib/curl": "*"
+        "ext-curl": "*"
     },
     "autoload": {
         "psr-4": {

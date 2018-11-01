@@ -3,9 +3,8 @@
 namespace Lenius\Economic\Tests;
 
 use Lenius\Economic\API\Client;
-use PHPUnit\Framework\TestCase;
 
-class ClientTest extends TestCase
+class ClientTest extends BaseTest
 {
     /** @var Client */
     protected $client;

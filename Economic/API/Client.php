@@ -31,10 +31,11 @@ class Client
      */
     public function __construct($secret_token = '', $grant_token = '')
     {
-        // Check if lib cURL is enabled
+        // @codeCoverageIgnoreStart
         if (!function_exists('curl_init')) {
             throw new Exception('Lib cURL must be enabled on the server');
         }
+        // @codeCoverageIgnoreEnd
 
         if (empty($secret_token)) {
             throw new Exception('secret token is missing');
@@ -68,9 +69,11 @@ class Client
      */
     public function create()
     {
+        // @codeCoverageIgnoreStart
         if (!empty($this->ch)) {
             curl_close($this->ch);
         }
+        // @codeCoverageIgnoreEnd
 
         // Instantiate cURL object
         $this->ch = curl_init();

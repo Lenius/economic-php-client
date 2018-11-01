@@ -154,10 +154,12 @@ class Request
             curl_setopt($this->client->ch, CURLOPT_POSTFIELDS, $post);
         }
 
+        // @codeCoverageIgnoreStart
         // Store received headers in temporary memory file, remember sent headers
         if (!$fh_header = fopen('php://temp', 'w+')) {
             throw new Exception('Fail to create tmp');
         }
+        // @codeCoverageIgnoreEnd
 
         curl_setopt($this->client->ch, CURLOPT_WRITEHEADER, $fh_header);
         curl_setopt($this->client->ch, CURLINFO_HEADER_OUT, true);
@@ -165,12 +167,14 @@ class Request
         // Execute the request
         $response_data = curl_exec($this->client->ch);
 
+        // @codeCoverageIgnoreStart
         if (curl_errno($this->client->ch) !== 0) {
             // An error occurred
             fclose($fh_header);
 
             throw new Exception(curl_error($this->client->ch), curl_errno($this->client->ch));
         }
+        // @codeCoverageIgnoreEnd
 
         // Grab the headers
         $sent_headers = curl_getinfo($this->client->ch, CURLINFO_HEADER_OUT);

@@ -26,6 +26,12 @@ class RequestTest extends TestCase
         $this->request->get('');
     }
 
+    public function testGetPath()
+    {
+        $getResponse = $this->request->get('units?demo=demo', ['limit' => 10]);
+        $this->assertTrue(($getResponse instanceof Response));
+    }
+
     /**
      * @expectedException InvalidArgumentException
      */

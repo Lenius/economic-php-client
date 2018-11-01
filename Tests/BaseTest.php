@@ -7,17 +7,17 @@ use ReflectionClass;
 
 abstract class BaseTest extends TestCase
 {
-
     /**
-     * getPrivateProperty
+     * getPrivateProperty.
      *
      * @author    Joe Sexton <joe@webtipblog.com>
      *
-     * @param    string $className
-     * @param    string $propertyName
+     * @param string $className
+     * @param string $propertyName
+     *
+     * @throws \ReflectionException
      *
      * @return \ReflectionProperty
-     * @throws \ReflectionException
      */
     public function getPrivateProperty($className, $propertyName)
     {
@@ -29,15 +29,16 @@ abstract class BaseTest extends TestCase
     }
 
     /**
-     * getPrivateMethod
+     * getPrivateMethod.
      *
      * @author    Joe Sexton <joe@webtipblog.com>
      *
-     * @param    string $className
-     * @param    string $methodName
+     * @param string $className
+     * @param string $methodName
+     *
+     * @throws \ReflectionException
      *
      * @return \ReflectionMethod
-     * @throws \ReflectionException
      */
     public function getPrivateMethod($className, $methodName)
     {
@@ -49,12 +50,13 @@ abstract class BaseTest extends TestCase
     }
 
     /**
-     * getConstants
+     * getConstants.
      *
      * @param string $className
      *
-     * @return array
      * @throws \ReflectionException
+     *
+     * @return array
      */
     public function getConstants($className)
     {

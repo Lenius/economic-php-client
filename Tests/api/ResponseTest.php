@@ -83,7 +83,7 @@ class ResponseTest extends BaseTest
         $property = $this->getPrivateProperty('Lenius\Economic\API\Response', 'response_data');
         $property->setValue($response, 'test');
 
-        $responseObject= $response->asObject();
+        $responseObject = $response->asObject();
 
         $this->assertCount(0, (array) $responseObject);
     }

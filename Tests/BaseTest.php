@@ -62,5 +62,4 @@ abstract class BaseTest extends TestCase
 
         return $oClass->getConstants();
     }
-
 }

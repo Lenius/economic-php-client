@@ -59,6 +59,7 @@ class Client
     {
         if (!empty($this->ch)) {
             curl_close($this->ch);
+            $this->ch = null;
         }
     }
 

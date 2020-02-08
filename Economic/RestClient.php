@@ -9,6 +9,7 @@ class RestClient
 {
     /**
      * Contains the Economic_Request object.
+     * @var Request
      **/
     public $request;
 

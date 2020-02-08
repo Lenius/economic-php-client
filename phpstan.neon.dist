@@ -1,0 +1,12 @@
+parameters:
+    level: max
+    paths:
+        - Economic
+    reportUnmatchedIgnoredErrors: false
+    checkGenericClassInNonGenericObjectType: false
+    checkMissingIterableValueType: false
+    ignoreErrors:
+        - '#Method Lenius\\Economic\\API\\Client::shutdown\(\) has no return typehint specified.#'
+        - '#Method Lenius\\Economic\\API\\Client::create\(\) has no return typehint specified.#'
+        - '#Method Lenius\\Economic\\API\\Client::authenticate\(\) has no return typehint specified.#'
+        - '#Property Lenius\\Economic\\API\\Client::\$ch \(resource\) does not accept null.#'

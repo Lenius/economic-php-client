@@ -9,12 +9,14 @@ class Client
 {
     /**
      * Contains cURL instance.
+     *
      * @var resource
      */
     public $ch;
 
     /**
      * Contains the authentication string.
+     *
      * @var string
      */
     protected $secret_token;
@@ -59,7 +61,6 @@ class Client
      * Shutdown function.
      *
      * Closes the current cURL connection
-     *
      */
     public function shutdown()
     {

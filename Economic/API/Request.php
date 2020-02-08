@@ -9,6 +9,7 @@ class Request
 {
     /**
      * Contains Economic_Client instance.
+     *
      * @var Client
      */
     protected $client;

@@ -9,19 +9,15 @@ class ClientTest extends BaseTest
     /** @var Client */
     protected $client;
 
-    /**
-     * @expectedException \Exception
-     */
     public function testMissingSecretToken()
     {
+        $this->expectException(\Exception::class);
         $this->client = new Client('', 'demo');
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testMissingGrantToken()
     {
+        $this->expectException(\Exception::class);
         $this->client = new Client('demo', '');
     }
 }

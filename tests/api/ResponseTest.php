@@ -9,7 +9,7 @@ class ResponseTest extends BaseTest
     /** @var RestClient */
     protected $client;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->client = new RestClient('demo', 'demo');
     }
@@ -52,7 +52,7 @@ class ResponseTest extends BaseTest
         $this->assertTrue(is_int($statusCode));
         $this->assertTrue(is_array($headers));
         $this->assertTrue(is_string($responseRaw));
-        $this->assertContains('X-AppSecretToken:demo', $headers['sent']);
+        $this->assertContains('x-appsecrettoken:demo', preg_split("/\r\n|\n|\r/", $headers['sent']));
     }
 
     public function testReturnOfResponseDataAsArray()

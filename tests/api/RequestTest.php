@@ -2,6 +2,7 @@
 
 namespace Lenius\Economic\Tests;
 
+use InvalidArgumentException;
 use Lenius\Economic\API\Client;
 use Lenius\Economic\API\Request;
 use Lenius\Economic\API\Response;
@@ -12,17 +13,15 @@ class RequestTest extends TestCase
     /** @var Request */
     protected $request;
 
-    public function setUp()
+    public function setUp(): void
     {
         $client = new Client('demo', 'demo');
         $this->request = new Request($client);
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testMissingGetPath()
     {
+        $this->expectException(InvalidArgumentException::class);
         $this->request->get('');
     }
 
@@ -32,35 +31,27 @@ class RequestTest extends TestCase
         $this->assertTrue(($getResponse instanceof Response));
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testMissingPostPath()
     {
+        $this->expectException(InvalidArgumentException::class);
         $this->request->post('');
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testMissingPutPath()
     {
+        $this->expectException(InvalidArgumentException::class);
         $this->request->put('');
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testMissingPatchPath()
     {
+        $this->expectException(InvalidArgumentException::class);
         $this->request->patch('');
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testMissingDeletePath()
     {
+        $this->expectException(InvalidArgumentException::class);
         $this->request->delete('');
     }
 

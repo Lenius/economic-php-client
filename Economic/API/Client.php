@@ -9,8 +9,7 @@ class Client
 {
     /**
      * Contains cURL instance.
-     *
-     * @var resource
+     * @var resource|false
      */
     public $ch;
 
@@ -19,12 +18,12 @@ class Client
      *
      * @var string
      */
-    protected $secret_token;
+    protected string $secret_token;
 
     /**
      * @var string
      */
-    protected $grant_token;
+    protected string $grant_token;
 
     /**
      * __construct function.
@@ -36,10 +35,10 @@ class Client
      *
      * @throws Exception
      */
-    public function __construct($secret_token = '', $grant_token = '')
+    public function __construct(string $secret_token = '', string $grant_token = '')
     {
         // @codeCoverageIgnoreStart
-        if (!function_exists('curl_init')) {
+        if (! function_exists('curl_init')) {
             throw new Exception('Lib cURL must be enabled on the server');
         }
         // @codeCoverageIgnoreEnd
@@ -62,11 +61,11 @@ class Client
      *
      * Closes the current cURL connection
      */
-    public function shutdown()
+    public function shutdown(): void
     {
-        if (!empty($this->ch)) {
+        if (! empty($this->ch)) {
             curl_close($this->ch);
-            $this->ch = null;
+            $this->ch = false;
         }
     }
 
@@ -75,10 +74,10 @@ class Client
      *
      * Create cURL connection with authentication
      */
-    public function create()
+    public function create(): void
     {
         // @codeCoverageIgnoreStart
-        if (!empty($this->ch)) {
+        if (! empty($this->ch)) {
             curl_close($this->ch);
         }
         // @codeCoverageIgnoreEnd
@@ -95,18 +94,18 @@ class Client
      *
      * Create authentication headers
      */
-    protected function authenticate()
+    protected function authenticate(): void
     {
         $headers = [
             'Accept: application/json',
             'Content-Type: application/json; charset=utf-8',
         ];
 
-        if (!empty($this->secret_token)) {
+        if (! empty($this->secret_token)) {
             $headers[] = 'X-AppSecretToken:'.$this->secret_token;
         }
 
-        if (!empty($this->grant_token)) {
+        if (! empty($this->grant_token)) {
             $headers[] = 'X-AgreementGrantToken:'.$this->grant_token;
         }
 

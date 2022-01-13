@@ -12,7 +12,7 @@ class Response
      *
      * @var int
      */
-    protected $status_code;
+    protected int $status_code;
 
     /**
      * The headers sent during the request.
@@ -56,7 +56,7 @@ class Response
      *
      * @return array
      */
-    public function asRaw($keep_authorization_value = false)
+    public function asRaw(bool $keep_authorization_value = false)
     {
         // To avoid unintentional logging of credentials the default is to mask the value of the Authorization: header
         if ($keep_authorization_value) {

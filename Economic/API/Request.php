@@ -12,7 +12,7 @@ class Request
      *
      * @var Client
      */
-    protected $client;
+    protected Client $client;
 
     /**
      * __construct function.
@@ -32,16 +32,16 @@ class Request
      * Performs an API GET request
      *
      * @param string $path
-     * @param array  $query
-     *
-     * @throws Exception
+     * @param array $query
      *
      * @return Response
+     *@throws Exception
+     *
      */
-    public function get($path, $query = [])
+    public function get(string $path, array $query = []): Response
     {
         // Add query parameters to $path?
-        if (!empty($query)) {
+        if (! empty($query)) {
             if (strpos($path, '?') === false) {
                 $path .= '?'.http_build_query($query, '', '&');
             } else {
@@ -61,11 +61,11 @@ class Request
      * @param string $path
      * @param array  $form
      *
-     * @throws Exception
-     *
      * @return Response
+     *@throws Exception
+     *
      */
-    public function post($path, $form = [])
+    public function post(string $path, $form = []): Response
     {
         // Start the request and return the response
         return $this->execute('POST', $path, $form);
@@ -77,13 +77,13 @@ class Request
      * Performs an API PUT request
      *
      * @param string $path
-     * @param array  $form
-     *
-     * @throws Exception
+     * @param array $form
      *
      * @return Response
+     *@throws Exception
+     *
      */
-    public function put($path, $form = [])
+    public function put(string $path, array $form = [])
     {
         // Start the request and return the response
         return $this->execute('PUT', $path, $form);
@@ -95,13 +95,13 @@ class Request
      * Performs an API PATCH request
      *
      * @param string $path
-     * @param array  $form
-     *
-     * @throws Exception
+     * @param array $form
      *
      * @return Response
+     *@throws Exception
+     *
      */
-    public function patch($path, $form = [])
+    public function patch(string $path, array $form = [])
     {
         // Start the request and return the response
         return $this->execute('PATCH', $path, $form);
@@ -113,13 +113,13 @@ class Request
      * Performs an API DELETE request
      *
      * @param string $path
-     * @param array  $form
-     *
-     * @throws Exception
+     * @param array $form
      *
      * @return Response
+     *@throws Exception
+     *
      */
-    public function delete($path, $form = [])
+    public function delete(string $path, array $form = [])
     {
         // Start the request and return the response
         return $this->execute('DELETE', $path, $form);
@@ -127,17 +127,17 @@ class Request
 
     /**
      * @param string $request_type
-     * @param array  $form
+     * @param array $form
      * @param string $path
      *
-     * @throws Exception
-     *
      * @return Response
+     *@throws Exception
+     *
      */
-    protected function execute($request_type, $path, $form = [])
+    protected function execute(string $request_type, string $path, array $form = [])
     {
         // Store received headers in temporary memory file, remember sent headers
-        if (!$path) {
+        if (! $path) {
             throw new \InvalidArgumentException('Path is missing');
         }
 
@@ -151,14 +151,14 @@ class Request
         curl_setopt($this->client->ch, CURLOPT_CUSTOMREQUEST, $request_type);
 
         // If additional data is delivered, we will send it along with the API request
-        if (is_array($form) && !empty($form)) {
+        if (is_array($form) && ! empty($form)) {
             $post = json_encode($form);
             curl_setopt($this->client->ch, CURLOPT_POSTFIELDS, $post);
         }
 
         // @codeCoverageIgnoreStart
         // Store received headers in temporary memory file, remember sent headers
-        if (!$fh_header = fopen('php://temp', 'w+')) {
+        if (! $fh_header = fopen('php://temp', 'w+')) {
             throw new Exception('Fail to create tmp');
         }
         // @codeCoverageIgnoreEnd

@@ -37,8 +37,12 @@ if ($status == 200) {
 
 ## Testing
 
+Run the tests with:
+
 ``` bash
-$ composer test
+composer psalm
+composer stan
+composer test
 ```
 
 ## Contributing

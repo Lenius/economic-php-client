@@ -10,5 +10,5 @@ class Constants
     /**
      * API DEFINITIONS.
      */
-    const API_URL = 'https://restapi.e-conomic.com/';
+    public const API_URL = 'https://restapi.e-conomic.com/';
 }

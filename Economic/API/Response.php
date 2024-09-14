@@ -123,7 +123,7 @@ class Response
      */
     public function asString()
     {
-        reurn $this->response_data;
+        return $this->response_data;
     }
 
     /**

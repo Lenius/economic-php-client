@@ -145,7 +145,7 @@ class Request
         $this->client->create();
 
         // Set the request path
-        curl_setopt($this->client->ch, CURLOPT_URL, Constants::API_URL.trim($path, '/'));
+        curl_setopt($this->client->ch, CURLOPT_URL, $this->client->getUrl().trim($path, '/'));
 
         // Set the HTTP request type
         curl_setopt($this->client->ch, CURLOPT_CUSTOMREQUEST, $request_type);

@@ -26,6 +26,11 @@ class Client
     protected string $grant_token;
 
     /**
+     * @var string
+     */
+    protected string $base_url;
+
+    /**
      * __construct function.
      *
      * Instantiate object
@@ -35,7 +40,7 @@ class Client
      *
      * @throws Exception
      */
-    public function __construct(string $secret_token = '', string $grant_token = '')
+    public function __construct(string $secret_token = '', string $grant_token = '', string $base_url = '')
     {
         // @codeCoverageIgnoreStart
         if (! function_exists('curl_init')) {
@@ -54,6 +59,11 @@ class Client
         // Set auth string property
         $this->secret_token = $secret_token;
         $this->grant_token = $grant_token;
+        if (empty($base_url)) {
+          $this->base_url = Constants::API_URL;
+        } else {
+          $this->base_url = $base_url;
+        }
     }
 
     /**
@@ -119,4 +129,9 @@ class Client
 
         curl_setopt_array($this->ch, $options);
     }
+
+  public function getUrl() {
+    return $this->base_url;
+  }
+
 }

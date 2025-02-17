@@ -7,3 +7,8 @@ composer.lock
 priv-test.php
 .idea
 .php_cs.cache
+nbproject
+
+.editorconfig
+
+.github/workflows/php.yml

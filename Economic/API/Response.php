@@ -115,6 +115,18 @@ class Response
     }
 
     /**
+     * asObject.
+     *
+     * Returns the response body as string
+     *
+     * @return \String
+     */
+    public function asString()
+    {
+        return $this->response_data;
+    }
+
+    /**
      * httpStatus.
      *
      * Returns the http_status code

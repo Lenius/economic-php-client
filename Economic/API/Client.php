@@ -82,9 +82,11 @@ class Client
     /**
      * Create function.
      *
+     * @param string $idempotency_key
+     *
      * Create cURL connection with authentication
      */
-    public function create(): void
+    public function create($idempotency_key = ''): void
     {
         // @codeCoverageIgnoreStart
         if (! empty($this->ch)) {
@@ -96,15 +98,17 @@ class Client
         $this->ch = curl_init();
 
         // Apply authentication headers
-        $this->authenticate();
+        $this->authenticate($idempotency_key);
     }
 
     /**
      * authenticate function.
      *
+     * @param string $idempotency_key
+     *
      * Create authentication headers
      */
-    protected function authenticate(): void
+    protected function authenticate($idempotency_key = ''): void
     {
         $headers = [
             'Accept: application/json',
@@ -117,6 +121,10 @@ class Client
 
         if (! empty($this->grant_token)) {
             $headers[] = 'X-AgreementGrantToken:'.$this->grant_token;
+        }
+
+        if(! empty( $idempotency_key)) {
+            $headers[] = 'Idempotency-Key:'.$idempotency_key;
         }
 
         //default headers

@@ -60,15 +60,16 @@ class Request
      *
      * @param string $path
      * @param array  $form
+     * @param string $idempotency_key
      *
      * @return Response
      *@throws Exception
      *
      */
-    public function post(string $path, $form = []): Response
+    public function post(string $path, $form = [], string $idempotency_key = ''): Response
     {
         // Start the request and return the response
-        return $this->execute('POST', $path, $form);
+        return $this->execute('POST', $path, $form, $idempotency_key);
     }
 
     /**
@@ -78,15 +79,16 @@ class Request
      *
      * @param string $path
      * @param array $form
+     * @param string $idempotency_key
      *
      * @return Response
      *@throws Exception
      *
      */
-    public function put(string $path, array $form = [])
+    public function put(string $path, array $form = [], string $idempotency_key = '')
     {
         // Start the request and return the response
-        return $this->execute('PUT', $path, $form);
+        return $this->execute('PUT', $path, $form, $idempotency_key);
     }
 
     /**
@@ -96,15 +98,16 @@ class Request
      *
      * @param string $path
      * @param array $form
+     * @param string $idempotency_key
      *
      * @return Response
      *@throws Exception
      *
      */
-    public function patch(string $path, array $form = [])
+    public function patch(string $path, array $form = [], string $idempotency_key = '')
     {
         // Start the request and return the response
-        return $this->execute('PATCH', $path, $form);
+        return $this->execute('PATCH', $path, $form, $idempotency_key);
     }
 
     /**
@@ -114,27 +117,29 @@ class Request
      *
      * @param string $path
      * @param array $form
+     * @param string $idempotency_key
      *
      * @return Response
      *@throws Exception
      *
      */
-    public function delete(string $path, array $form = [])
+    public function delete(string $path, array $form = [], string $idempotency_key = '')
     {
         // Start the request and return the response
-        return $this->execute('DELETE', $path, $form);
+        return $this->execute('DELETE', $path, $form, $idempotency_key);
     }
 
     /**
      * @param string $request_type
-     * @param array $form
      * @param string $path
+     * @param array $form
+     * @param string $idempotency_key
      *
      * @return Response
      *@throws Exception
      *
      */
-    protected function execute(string $request_type, string $path, array $form = [])
+    protected function execute(string $request_type, string $path, array $form = [], string $idempotency_key = '')
     {
         // Store received headers in temporary memory file, remember sent headers
         if (! $path) {
@@ -142,7 +147,7 @@ class Request
         }
 
         // Init client
-        $this->client->create();
+        $this->client->create($idempotency_key);
 
         // Set the request path
         curl_setopt($this->client->ch, CURLOPT_URL, $this->client->getUrl().trim($path, '/'));

@@ -138,6 +138,32 @@ class Response
         return $this->status_code;
     }
 
+
+    /**
+     * sentHeaders.
+     *
+     * Returns the sent_headers
+     *
+     * @return array
+     */
+    public function sentHeaders()
+    {
+        return $this->sent_headers;
+    }
+
+
+    /**
+     * receivedHeaders.
+     *
+     * Returns the received_headers
+     *
+     * @return array
+     */
+    public function receivedHeaders()
+    {
+        return $this->received_headers;
+    }
+
     /**
      * isSuccess.
      *

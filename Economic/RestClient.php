@@ -24,10 +24,11 @@ class RestClient
      *
      * @param string $secret_token
      * @param string $grant_token
+     * @param string $base_url
      *
      * @throws API\Exception
      */
-    public function __construct(string $secret_token = '', string $grant_token = '', string $base_url)
+    public function __construct(string $secret_token = '', string $grant_token = '', string $base_url = '')
     {
         $client = new Client($secret_token, $grant_token, $base_url);
         $this->request = new Request($client);

@@ -14,6 +14,21 @@
 
     <issueHandlers>
         <NoInterfaceProperties errorLevel="suppress"/>
+        <!-- Public API methods are used by library consumers, not internally -->
+        <PossiblyUnusedMethod errorLevel="suppress"/>
+        <UnusedClass errorLevel="suppress"/>
+        <!-- Classes in a library are intentionally extendable -->
+        <ClassMustBeFinal errorLevel="suppress"/>
+        <!-- curl functions accept both resource (PHP 7) and CurlHandle (PHP 8) -->
+        <PossiblyInvalidArgument errorLevel="suppress"/>
+        <!-- $ch is always initialized via create() before use, false is only the uninitialized state -->
+        <PossiblyFalseArgument errorLevel="suppress"/>
+        <InvalidPropertyAssignmentValue errorLevel="suppress"/>
+        <RedundantCondition errorLevel="suppress"/>
+        <PossiblyFalsePropertyAssignmentValue errorLevel="suppress"/>
+        <RedundantCast errorLevel="suppress"/>
+        <!-- ini_get() can return false but not in practice for arg_separator.output -->
+        <PossiblyFalseOperand errorLevel="suppress"/>
     </issueHandlers>
 
     <plugins>

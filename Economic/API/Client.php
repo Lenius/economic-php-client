@@ -7,11 +7,7 @@ namespace Lenius\Economic\API;
  */
 class Client
 {
-    /**
-     * Contains cURL instance.
-     * @var resource|false
-     */
-    public $ch;
+    public \CurlHandle|false $ch = false;
 
     /**
      * Contains the authentication string.
@@ -60,9 +56,9 @@ class Client
         $this->secret_token = $secret_token;
         $this->grant_token = $grant_token;
         if (empty($base_url)) {
-          $this->base_url = Constants::API_URL;
+            $this->base_url = Constants::API_URL;
         } else {
-          $this->base_url = $base_url;
+            $this->base_url = $base_url;
         }
     }
 
@@ -123,7 +119,7 @@ class Client
             $headers[] = 'X-AgreementGrantToken:'.$this->grant_token;
         }
 
-        if(! empty( $idempotency_key)) {
+        if (! empty($idempotency_key)) {
             $headers[] = 'Idempotency-Key:'.$idempotency_key;
         }
 
@@ -138,8 +134,9 @@ class Client
         curl_setopt_array($this->ch, $options);
     }
 
-  public function getUrl() {
-    return $this->base_url;
-  }
+    public function getUrl(): string
+    {
+        return $this->base_url;
+    }
 
 }

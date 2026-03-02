@@ -2,6 +2,7 @@
 
 namespace Lenius\Economic\Tests;
 
+use Lenius\Economic\API\Response;
 use Lenius\Economic\RestClient;
 
 class ResponseTest extends BaseTest
@@ -52,7 +53,7 @@ class ResponseTest extends BaseTest
         $this->assertTrue(is_int($statusCode));
         $this->assertTrue(is_array($headers));
         $this->assertTrue(is_string($responseRaw));
-        $this->assertContains('x-appsecrettoken:demo', preg_split("/\r\n|\n|\r/", $headers['sent']));
+        $this->assertContains('X-AppSecretToken:demo', preg_split("/\r\n|\n|\r/", $headers['sent']));
     }
 
     public function testReturnOfResponseDataAsArray()
@@ -86,5 +87,34 @@ class ResponseTest extends BaseTest
         $responseObject = $response->asObject();
 
         $this->assertCount(0, (array) $responseObject);
+    }
+
+    public function testReturnOfResponseDataAsString()
+    {
+        $response = $this->client->request->get('/units', ['demo' => 'true']);
+        $this->assertTrue(is_string($response->asString()));
+    }
+
+    public function testSentHeaders()
+    {
+        $response = $this->client->request->get('/units', ['demo' => 'true']);
+        $this->assertTrue(is_string($response->sentHeaders()));
+    }
+
+    public function testReceivedHeaders()
+    {
+        $response = $this->client->request->get('/units', ['demo' => 'true']);
+        $this->assertTrue(is_string($response->receivedHeaders()));
+    }
+
+    public function testAuthorizationHeaderMasking()
+    {
+        $sentHeaders = "GET /units HTTP/1.1\nAuthorization: Basic dGVzdA==\nAccept: application/json\n";
+        $response = new Response(200, $sentHeaders, '', '{}');
+
+        list(, $headers,) = $response->asRaw(false);
+
+        $lines = explode("\n", $headers['sent']);
+        $this->assertContains('Authorization: <hidden by default>', $lines);
     }
 }

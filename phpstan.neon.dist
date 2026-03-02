@@ -3,18 +3,11 @@ parameters:
     paths:
         - Economic
     reportUnmatchedIgnoredErrors: false
-    checkGenericClassInNonGenericObjectType: false
-    checkMissingIterableValueType: false
     ignoreErrors:
         - '#Method Lenius\\Economic\\API\\Client::shutdown\(\) has no return typehint specified.#'
         - '#Method Lenius\\Economic\\API\\Client::create\(\) has no return typehint specified.#'
         - '#Method Lenius\\Economic\\API\\Client::authenticate\(\) has no return typehint specified.#'
-        - '#Property Lenius\\Economic\\API\\Client::\$ch \(resource\) does not accept null.#'
-        - '#Parameter \#1 \$handle of function curl_close expects CurlHandle, resource given.#'
-        - '#Parameter \#1 \$handle of function curl_setopt expects CurlHandle, resource\|false given.#'
-        - '#Parameter \#1 \$handle of function curl_exec expects CurlHandle, resource\|false given.#'
-        - '#Parameter \#1 \$handle of function curl_errno expects CurlHandle, resource\|false given.#'
-        - '#Parameter \#1 \$handle of function curl_getinfo expects CurlHandle, resource\|false given.#'
-        - '#Parameter \#1 \$handle of function curl_error expects CurlHandle, resource\|false given.#'
-        - '#Parameter \#1 \$handle of function curl_setopt_array expects CurlHandle, resource\|false given.#'
-        - '#Property Lenius\\Economic\\API\\Client::\$ch \(resource\|false\) does not accept CurlHandle.#'
+        - '#has parameter .+ with no value type specified in iterable type array#'
+        - '#return type has no value type specified in iterable type array#'
+        - '#Parameter \#3 \$value of function curl_setopt expects#'
+        - '#Parameter \#1 \$handle of function curl_#'

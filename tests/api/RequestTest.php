@@ -84,4 +84,18 @@ class RequestTest extends TestCase
 
         $this->assertFalse($pingResponse->isSuccess());
     }
+
+    public function testPostWithData()
+    {
+        $response = $this->request->post('/invoices', ['number' => 1]);
+        $this->assertTrue(($response instanceof Response));
+    }
+
+    public function testPostWithIdempotencyKey()
+    {
+        $response = $this->request->post('/invoices', [], 'test-idempotency-key');
+        list(, $headers,) = $response->asRaw(true);
+        $sentLines = preg_split("/\r\n|\n|\r/", $headers['sent']);
+        $this->assertContains('Idempotency-Key:test-idempotency-key', $sentLines);
+    }
 }

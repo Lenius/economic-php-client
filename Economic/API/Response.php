@@ -21,29 +21,24 @@ class Response
      */
     protected $sent_headers;
 
-    /**
-     * The headers received during the request.
-     *
-     * @var string|bool
-     */
-    protected $received_headers;
+    protected string|false $received_headers;
 
     /**
      * Response body of last request.
      *
-     * @var mixed
+     * @var string
      */
-    protected $response_data;
+    protected string $response_data;
 
     /**
      * Response constructor.
      *
      * @param int         $status_code
      * @param string      $sent_headers
-     * @param string|bool $received_headers
-     * @param mixed       $response_data
+     * @param string|false  $received_headers
+     * @param string      $response_data
      */
-    public function __construct($status_code, $sent_headers, $received_headers, $response_data)
+    public function __construct(int $status_code, string $sent_headers, string|false $received_headers, string $response_data)
     {
         $this->status_code = $status_code;
         $this->sent_headers = $sent_headers;
@@ -89,9 +84,10 @@ class Response
      *
      * @return array
      */
-    public function asArray()
+    public function asArray(): array
     {
-        if ($response = json_decode($this->response_data, true)) {
+        $response = json_decode((string) $this->response_data, true);
+        if (is_array($response)) {
             return $response;
         }
 
@@ -105,9 +101,10 @@ class Response
      *
      * @return \stdClass
      */
-    public function asObject()
+    public function asObject(): \stdClass
     {
-        if ($response = json_decode($this->response_data)) {
+        $response = json_decode((string) $this->response_data);
+        if ($response instanceof \stdClass) {
             return $response;
         }
 
@@ -119,11 +116,11 @@ class Response
      *
      * Returns the response body as string
      *
-     * @return \String
+     * @return string
      */
-    public function asString()
+    public function asString(): string
     {
-        return $this->response_data;
+        return (string) $this->response_data;
     }
 
     /**
@@ -133,7 +130,7 @@ class Response
      *
      * @return int
      */
-    public function httpStatus()
+    public function httpStatus(): int
     {
         return $this->status_code;
     }
@@ -144,9 +141,9 @@ class Response
      *
      * Returns the sent_headers
      *
-     * @return array
+     * @return string
      */
-    public function sentHeaders()
+    public function sentHeaders(): string
     {
         return $this->sent_headers;
     }
@@ -157,9 +154,9 @@ class Response
      *
      * Returns the received_headers
      *
-     * @return array
+     * @return string|false
      */
-    public function receivedHeaders()
+    public function receivedHeaders(): string|false
     {
         return $this->received_headers;
     }

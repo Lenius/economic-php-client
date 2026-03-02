@@ -156,8 +156,8 @@ class Request
         curl_setopt($this->client->ch, CURLOPT_CUSTOMREQUEST, $request_type);
 
         // If additional data is delivered, we will send it along with the API request
-        if (is_array($form) && ! empty($form)) {
-            $post = json_encode($form);
+        if (! empty($form)) {
+            $post = (string) json_encode($form);
             curl_setopt($this->client->ch, CURLOPT_POSTFIELDS, $post);
         }
 
@@ -184,7 +184,7 @@ class Request
         // @codeCoverageIgnoreEnd
 
         // Grab the headers
-        $sent_headers = curl_getinfo($this->client->ch, CURLINFO_HEADER_OUT);
+        $sent_headers = (string) curl_getinfo($this->client->ch, CURLINFO_HEADER_OUT);
         rewind($fh_header);
         $received_headers = stream_get_contents($fh_header);
         fclose($fh_header);
@@ -196,6 +196,6 @@ class Request
         $this->client->shutdown();
 
         // Return the response object.
-        return new Response($response_code, $sent_headers, $received_headers, $response_data);
+        return new Response($response_code, $sent_headers, $received_headers, is_string($response_data) ? $response_data : '');
     }
 }

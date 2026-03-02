@@ -37,12 +37,42 @@ if ($status == 200) {
 
 ## Testing
 
-Run the tests with:
+Tests kræver PHP 8.2+ med Xdebug til code coverage. Den nemmeste måde er via Docker.
+
+### Docker (anbefalet)
+
+Byg image:
+``` bash
+docker build -t economic-php-test .
+```
+
+Kør alle checks (tests, PHPStan og Psalm):
+``` bash
+docker run --rm economic-php-test
+```
+
+Kør med code coverage HTML-rapport:
+``` bash
+docker run --rm -v "$(pwd)/build:/app/build" economic-php-test
+```
+Åbn `build/logs/phpunit-html/index.html` i en browser for at se rapporten.
+
+Kør enkeltvis:
+``` bash
+docker run --rm economic-php-test composer test
+docker run --rm economic-php-test composer stan
+docker run --rm economic-php-test composer psalm
+```
+
+### Lokalt
+
+Forudsætter PHP 8.2+, Composer og Xdebug installeret:
 
 ``` bash
-composer psalm
-composer stan
-composer test
+composer test   # PHPUnit med code coverage
+composer stan   # PHPStan statisk analyse
+composer psalm  # Psalm statisk analyse
+composer check  # Alle ovenstående på én gang
 ```
 
 ## Contributing

@@ -4,6 +4,7 @@ build/
 composer.phar
 composer.lock
 .php-cs-fixer.cache
+.phpunit.result.cache
 priv-test.php
 .idea
 .php_cs.cache

@@ -20,4 +20,10 @@ class ClientTest extends BaseTest
         $this->expectException(\Exception::class);
         $this->client = new Client('demo', '');
     }
+
+    public function testCustomBaseUrl()
+    {
+        $this->client = new Client('demo', 'demo', 'https://custom.example.com/');
+        $this->assertEquals('https://custom.example.com/', $this->client->getUrl());
+    }
 }

@@ -70,7 +70,6 @@ class Client
     public function shutdown(): void
     {
         if (! empty($this->ch)) {
-            curl_close($this->ch);
             $this->ch = false;
         }
     }
@@ -85,9 +84,6 @@ class Client
     public function create($idempotency_key = ''): void
     {
         // @codeCoverageIgnoreStart
-        if (! empty($this->ch)) {
-            curl_close($this->ch);
-        }
         // @codeCoverageIgnoreEnd
 
         // Instantiate cURL object
